@@ -1,4 +1,3 @@
 # DungeonsOfDoom
-.NET Course
 
-Console RPG made for a C# course
+Console RPG made for a .NET course
