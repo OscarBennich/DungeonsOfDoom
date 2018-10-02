@@ -15,16 +15,8 @@ namespace DungeonsOfDoom.Potions
 
         public override void UseItem(Player playerCharacter)
         {
-            if (playerCharacter.CurrentHealth + HealthValue > playerCharacter.MaxHealth)
-            {
-                playerCharacter.CurrentHealth = playerCharacter.MaxHealth;
-                playerCharacter.Backpack.Remove(this);
-            }
-            else
-            {
-                playerCharacter.CurrentHealth += HealthValue;
-                playerCharacter.Backpack.Remove(this);
-            }
+            playerCharacter.CurrentHealth = Math.Max(playerCharacter.CurrentHealth + HealthValue, playerCharacter.MaxHealth);
+            playerCharacter.Backpack.Remove(this);
         }
     }
 }
