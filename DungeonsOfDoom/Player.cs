@@ -26,7 +26,7 @@ namespace DungeonsOfDoom
         public void EquipWeapon(Weapon weapon)
         {
             Weapon = weapon;
-            //this.AttackDamage = Weapon.WeaponDamage;
+            this.AttackDamage = Weapon.WeaponDamage;
         }
     }
 }

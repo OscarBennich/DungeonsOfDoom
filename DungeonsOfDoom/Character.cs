@@ -8,7 +8,7 @@ namespace DungeonsOfDoom
     {   
         public int Health { get; set; }
 
-        public int AttackDamage { get; }
+        public int AttackDamage { get; set; }
 
         public string Name { get; }
 
