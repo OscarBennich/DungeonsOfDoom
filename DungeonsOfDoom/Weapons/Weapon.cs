@@ -13,11 +13,11 @@ namespace DungeonsOfDoom.Weapons
             WeaponDamage = weaponDamage;
         }
 
-        public override void UseItem(Player playercharacter)
+        public override void UseItem(Player playerCharacter)
         {   
-            playercharacter.Backpack.Add(playercharacter.Weapon);
-            playercharacter.Backpack.Remove(this);
-            playercharacter.Weapon = this;
+            playerCharacter.Backpack.Add(playerCharacter.Weapon);
+            playerCharacter.Backpack.Remove(this);
+            playerCharacter.EquipWeapon(this);
         }
     }
 }

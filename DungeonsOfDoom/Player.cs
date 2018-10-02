@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonsOfDoom.Weapons;
+using DungeonsOfDoom.Armors;
 
 namespace DungeonsOfDoom
 {
@@ -14,20 +15,30 @@ namespace DungeonsOfDoom
 
         public Weapon Weapon { get; set; }
 
+        public Armor Armor { get; set; }
+
+
         public List<Item> Backpack { get; }
 
-        public Player(int MaxHealth, Weapon weapon, string name, int x, int y) : base(MaxHealth, weapon.WeaponDamage, name)
+        public Player(int maxHealth, Weapon weapon, Armor armor, string name, int x, int y) : base(maxHealth, weapon.WeaponDamage, armor.ArmorClass, name)
         {
             X = x;
             Y = y;
             EquipWeapon(weapon);
-            Backpack = new List<Item> {weapon};
+            EquipArmor(armor);
+            Backpack = new List<Item>();
         }
 
         public void EquipWeapon(Weapon weapon)
         {
             Weapon = weapon;
-            this.AttackDamage = Weapon.WeaponDamage;
+            AttackDamage = Weapon.WeaponDamage;
+        }
+
+        public void EquipArmor(Armor armor)
+        {
+            Armor = armor; 
+            AttackDamage = Weapon.WeaponDamage;
         }
     }
 }

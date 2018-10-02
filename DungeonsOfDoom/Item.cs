@@ -22,6 +22,6 @@ namespace DungeonsOfDoom
             playerCharacter.Backpack.Add(this);
         }
 
-        public abstract void UseItem(Player player);
+        public abstract void UseItem(Player playerCharacter);
     }
 }

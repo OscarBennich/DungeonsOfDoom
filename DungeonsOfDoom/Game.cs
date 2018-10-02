@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonsOfDoom.Armors;
 using DungeonsOfDoom.Weapons;
 using DungeonsOfDoom.Potions;
 using DungeonsOfDoom.Monsters;
@@ -14,13 +15,15 @@ namespace DungeonsOfDoom
         Player player;
         Room[,] world;
         Random random = new Random();
-        private int currentBackpackSelection;
+        private int _currentBackpackSelection;
+        private List<string> _combatLog;
 
         public void Play()
         {
             CreatePlayer();
             CreateWorld();
-            currentBackpackSelection = 0;
+            _currentBackpackSelection = 0;
+            _combatLog = new List<string>();
 
             do
             {
@@ -36,7 +39,8 @@ namespace DungeonsOfDoom
         private void CreatePlayer()
         {   
             RustyKnife rustyKnife = new RustyKnife();
-            player = new Player(100, rustyKnife, "Oscar", 0, 0);
+            ClothArmor clothArmor = new ClothArmor();
+            player = new Player(100, rustyKnife, clothArmor, "Oscar", 0, 0);
         }
 
         private void CreateWorld()
@@ -46,7 +50,7 @@ namespace DungeonsOfDoom
             {
                 for (int x = 0; x < world.GetLength(0); x++)
                 {
-                    world[x, y] = new Room();
+                    world[x, y] = new Room();            
 
                     int itemOrMonsterPercentage = random.Next(0, 3);
 
@@ -70,7 +74,7 @@ namespace DungeonsOfDoom
                     // Item spawn
                     else
                     {
-                        int itemTypePercentage = random.Next(0, 10);
+                        int itemTypePercentage = random.Next(0, 15);
                         switch (itemTypePercentage)
                         {
                             case 0:
@@ -84,6 +88,12 @@ namespace DungeonsOfDoom
                                 break;
                             case 3:
                                 world[x, y].Item = new Rocketlauncher();
+                                break;
+                            case 4:
+                                world[x, y].Item = new LeatherArmor();
+                                break;
+                            case 5:
+                                world[x, y].Item = new PlateArmor();
                                 break;
                         }
                     }
@@ -103,7 +113,7 @@ namespace DungeonsOfDoom
                         Console.Write("P");
                     }
                     else if (room.Monster != null)
-                        Console.Write(room.Monster.Name);
+                        Console.Write(room.Monster.GetShortName());
                     else if (room.Item != null)
                         Console.Write("I");
                     else
@@ -114,26 +124,36 @@ namespace DungeonsOfDoom
         }
 
         private void DisplayStats()
-        {
+        {   
             Console.WriteLine("-------------------");
             Console.WriteLine($"Player: {player.Name}");
             Console.WriteLine($"Health: {player.CurrentHealth} / {player.MaxHealth}");
             Console.WriteLine("-------------------");
             Console.WriteLine("Equipment:");
-            Console.WriteLine("Armor: [...]");
+            Console.WriteLine($"Armor: [{player.Armor.Name}] ({player.Armor.ArmorClass} AC)");
             Console.WriteLine($"Weapon: [{player.Weapon.Name}] ({player.Weapon.WeaponDamage} ATK)");
             Console.WriteLine("-------------------");
             Console.WriteLine("Backpack: ");
-            for (int i = 0; i < player.Backpack.Count-1; i++)
+            for (int i = 0; i < player.Backpack.Count; i++)
             {
-                if (i == currentBackpackSelection)
+                if (i == _currentBackpackSelection)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;                 
                 }
+                else if (player.Backpack.Count == 0)
+                {
+                    Console.WriteLine("Empty");
+                }
 
                 Console.WriteLine(player.Backpack[i].Name);
                 Console.ResetColor();
+            }
+            Console.WriteLine("-------------------");
+            foreach (string s in _combatLog)
+            {
+                Console.WriteLine(s);
+                Console.WriteLine("----");
             }
         }
 
@@ -154,11 +174,20 @@ namespace DungeonsOfDoom
                     break;
                 case ConsoleKey.DownArrow: newY++;
                     break;
-                case ConsoleKey.W: currentBackpackSelection--;
+                case ConsoleKey.W: 
+                    if (_currentBackpackSelection != 0)
+                    {
+                        _currentBackpackSelection--;
+                    }
                     break;
-                case ConsoleKey.S: currentBackpackSelection++;
+                case ConsoleKey.S:
+                    if (_currentBackpackSelection != player.Backpack.Count-1)
+                    {
+                        _currentBackpackSelection++;
+                    }
                     break;
                 case ConsoleKey.Enter: UseCurrentlySelectedItem();
+                    _currentBackpackSelection = 0;
                      DisplayStats();
                     break;
                 default: isValidKey = false; break;
@@ -176,7 +205,7 @@ namespace DungeonsOfDoom
 
         private void UseCurrentlySelectedItem()
         {
-            player.Backpack[currentBackpackSelection].UseItem(player);
+            player.Backpack[_currentBackpackSelection].UseItem(player);
         }
 
         private void RoomEncounter()
@@ -184,15 +213,18 @@ namespace DungeonsOfDoom
             Room room = world[player.X, player.Y];
             room.Item?.PickUpItem(player);
             room.Item = null; // Remove item when picked up
+            DisplayStats();
 
             if (room.Monster != null)
             {
-                room.Monster.Attack(player);
-                player.Attack(room.Monster);
+                _combatLog.Add(room.Monster.Attack(player));
+                _combatLog.Add(player.Attack(room.Monster));
 
                 if(room.Monster.CurrentHealth <= 0)
                 {
-                    room.Monster = null; // Remove monster when defeated
+                    _combatLog.Add($"{room.Monster.Name} was defeated!");
+                    room.Monster = null; // Remove monster when defeated                    
+                    DisplayStats(); 
                 }
             }
         }
