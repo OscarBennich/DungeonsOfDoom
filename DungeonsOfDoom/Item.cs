@@ -20,11 +20,8 @@ namespace DungeonsOfDoom
         public void PickUpItem(Player playerCharacter)
         {
             playerCharacter.Backpack.Add(this);
-
-            if (this is Weapon)
-            {
-                playerCharacter.EquipWeapon((Weapon)this);
-            }
         }
+
+        public abstract void UseItem(Player player);
     }
 }

@@ -12,5 +12,11 @@ namespace DungeonsOfDoom.Potions
         {
             HealthValue = healthValue;
         }
+
+        public override void UseItem(Player playercharacter)
+        {
+            playercharacter.CurrentHealth += HealthValue;
+            playercharacter.Backpack.Remove(this);
+        }
     }
 }

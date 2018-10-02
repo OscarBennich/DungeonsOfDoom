@@ -14,11 +14,13 @@ namespace DungeonsOfDoom
         Player player;
         Room[,] world;
         Random random = new Random();
+        private int currentBackpackSelection;
 
         public void Play()
         {
             CreatePlayer();
             CreateWorld();
+            currentBackpackSelection = 0;
 
             do
             {
@@ -122,9 +124,16 @@ namespace DungeonsOfDoom
             Console.WriteLine($"Weapon: [{player.Weapon.Name}] ({player.Weapon.WeaponDamage} ATK)");
             Console.WriteLine("-------------------");
             Console.WriteLine("Backpack: ");
-            foreach (Item i in player.Backpack)
+            for (int i = 0; i < player.Backpack.Count-1; i++)
             {
-                Console.WriteLine(i.Name);
+                if (i == currentBackpackSelection)
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;                 
+                }
+
+                Console.WriteLine(player.Backpack[i].Name);
+                Console.ResetColor();
             }
         }
 
@@ -137,10 +146,21 @@ namespace DungeonsOfDoom
             ConsoleKeyInfo keyInfo = Console.ReadKey();
             switch (keyInfo.Key)
             {
-                case ConsoleKey.RightArrow: newX++; break;
-                case ConsoleKey.LeftArrow: newX--; break;
-                case ConsoleKey.UpArrow: newY--; break;
-                case ConsoleKey.DownArrow: newY++; break;
+                case ConsoleKey.RightArrow: newX++;
+                    break;
+                case ConsoleKey.LeftArrow: newX--;
+                    break;
+                case ConsoleKey.UpArrow: newY--;
+                    break;
+                case ConsoleKey.DownArrow: newY++;
+                    break;
+                case ConsoleKey.W: currentBackpackSelection--;
+                    break;
+                case ConsoleKey.S: currentBackpackSelection++;
+                    break;
+                case ConsoleKey.Enter: UseCurrentlySelectedItem();
+                     DisplayStats();
+                    break;
                 default: isValidKey = false; break;
             }
 
@@ -152,6 +172,11 @@ namespace DungeonsOfDoom
                 player.Y = newY;
                 RoomEncounter();
             }
+        }
+
+        private void UseCurrentlySelectedItem()
+        {
+            player.Backpack[currentBackpackSelection].UseItem(player);
         }
 
         private void RoomEncounter()

@@ -681,7 +681,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\W100567\\.nuget\\packages\\": {},
+    "C:\\Users\\i100567\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -690,14 +690,14 @@
       "projectUniqueName": "C:\\Projects\\DungeonsOfDoom\\DungeonsOfDoom\\DungeonsOfDoom.csproj",
       "projectName": "DungeonsOfDoom",
       "projectPath": "C:\\Projects\\DungeonsOfDoom\\DungeonsOfDoom\\DungeonsOfDoom.csproj",
-      "packagesPath": "C:\\Users\\W100567\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\i100567\\.nuget\\packages\\",
       "outputPath": "C:\\Projects\\DungeonsOfDoom\\DungeonsOfDoom\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\W100567\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\i100567\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
