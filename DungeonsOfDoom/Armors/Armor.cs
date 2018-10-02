@@ -8,7 +8,7 @@ namespace DungeonsOfDoom.Armors
     {
         public int ArmorClass { get; }
 
-        protected Armor(string name, int armorClass) : base(name)
+        protected Armor(string name, int armorClass, Rarity rarity) : base(name, rarity)
         {
             ArmorClass = armorClass;
         }

@@ -6,6 +6,6 @@ namespace DungeonsOfDoom.Weapons
 {
     class Rocketlauncher : Weapon
     {
-        public Rocketlauncher() : base("Rocket Launcher", 100) { }
+        public Rocketlauncher() : base("Rocket Launcher", 100, Rarity.Legendary) { }
     }
 }

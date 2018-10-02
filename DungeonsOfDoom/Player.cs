@@ -18,7 +18,7 @@ namespace DungeonsOfDoom
         public Armor Armor { get; set; }
 
 
-        public List<Item> Backpack { get; }
+        public List<IPickupAble> Backpack { get; }
 
         public Player(int maxHealth, Weapon weapon, Armor armor, string name, int x, int y) : base(maxHealth, weapon.WeaponDamage, armor.ArmorClass, name)
         {
@@ -26,7 +26,7 @@ namespace DungeonsOfDoom
             Y = y;
             EquipWeapon(weapon);
             EquipArmor(armor);
-            Backpack = new List<Item>();
+            Backpack = new List<IPickupAble>();
         }
 
         public void EquipWeapon(Weapon weapon)

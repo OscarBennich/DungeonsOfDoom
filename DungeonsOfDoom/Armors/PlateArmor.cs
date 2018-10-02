@@ -6,6 +6,6 @@ namespace DungeonsOfDoom.Armors
 {
     class PlateArmor : Armor
     {
-        public PlateArmor() : base("Plate Armor", 10) { }
+        public PlateArmor() : base("Plate Armor", 10, Rarity.Legendary) { }
     }
 }

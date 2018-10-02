@@ -4,10 +4,8 @@ using System.Text;
 
 namespace DungeonsOfDoom
 {
-    enum RarityEnum 
+    static class SpawnHelper
     {
-        Common = 25,
-        Rare = 10,
-        Legendary = 1
+        //public static List<>
     }
 }

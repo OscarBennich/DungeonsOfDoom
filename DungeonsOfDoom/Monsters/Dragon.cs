@@ -6,7 +6,7 @@ namespace DungeonsOfDoom.Monsters
 {
     class Dragon : Monster
     {   
-        public Dragon() : base(50, 20, 5, "Dragon") { }
+        public Dragon() : base(50, 20, 5, "Dragon", Rarity.Legendary) { }
 
         public override string GetShortName()
         {

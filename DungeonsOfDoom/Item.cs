@@ -8,18 +8,21 @@ using DungeonsOfDoom.Monsters;
 
 namespace DungeonsOfDoom
 {
-    abstract class Item
+    abstract class Item : IPickupAble, ISpawnable
     {
+        public Rarity Rarity { get; }
+
         public string Name { get; }
 
-        protected Item(string name)
+        protected Item(string name, Rarity rarity)
         {
             Name = name;
+            Rarity = rarity;
         }
 
-        public void PickUpItem(Player playerCharacter)
+        public void PickUp(Player player)
         {
-            playerCharacter.Backpack.Add(this);
+            player.Backpack.Add(this);
         }
 
         public abstract void UseItem(Player playerCharacter);

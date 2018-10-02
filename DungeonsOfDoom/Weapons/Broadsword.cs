@@ -6,6 +6,6 @@ namespace DungeonsOfDoom.Weapons
 {
     class Broadsword : Weapon
     {
-        public Broadsword() : base("Broadsword", 20) { }
+        public Broadsword() : base("Broadsword", 20, Rarity.Rare) { }
     }
 }

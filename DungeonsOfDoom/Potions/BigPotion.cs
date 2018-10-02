@@ -6,6 +6,6 @@ namespace DungeonsOfDoom.Potions
 {
     class BigPotion : Potion
     {
-        public BigPotion() : base("Big Potion", 40) { }
+        public BigPotion() : base("Big Potion", 40, Rarity.Rare) { }
     }
 }

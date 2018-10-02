@@ -6,6 +6,6 @@ namespace DungeonsOfDoom.Potions
 {
     class SmallPotion : Potion
     {
-        public SmallPotion() : base("Small Potion", 15) { }
+        public SmallPotion() : base("Small Potion", 15, Rarity.Common) { }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonsOfDoom.Armors;
@@ -12,20 +14,216 @@ namespace DungeonsOfDoom
 {
     class Game
     {
-        Player _player;
-        Room[,] _world;
-        Random _random = new Random();
-        private int _currentBackpackSelection;
-        private List<string> _combatLog;
-        private Monster[] _monsterSpawns;
-        private Item[] _itemsSpawns;
+        Player Player;
+        Room[,] World;
+        Random Random = new Random();
+        private int CurrentBackpackSelection;
+        private List<string> CombatLog;
+        private List<Monster> MonsterSpawns;
+        private List<Item> ItemsSpawns;
+        private List<ISpawnable> SpawnList;
 
         public void Play()
-        {        
+        {   
+            MonsterSpawns = new List<Monster>();
+            ItemsSpawns  = new List<Item>();
+
+            SpawnList = new List<ISpawnable>();
+
+            var test =
+                from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                from type in assembly.GetTypes()
+                where type.IsSubclassOf(typeof(ISpawnable))
+                select type;
+
+            var monsterSubclasses =
+                from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                from type in assembly.GetTypes()
+                where type.IsSubclassOf(typeof(Monster))
+                select type;
+
+            var armorSubclasses =
+                from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                from type in assembly.GetTypes()
+                where type.IsSubclassOf(typeof(Armor))
+                select type;
+
+            var potionSubclasses =
+                from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                from type in assembly.GetTypes()
+                where type.IsSubclassOf(typeof(Potion))
+                select type;
+
+            var weaponSubclasses =
+                from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                from type in assembly.GetTypes()
+                where type.IsSubclassOf(typeof(Weapon))
+                select type;
+
+            for (int i = 0; i < (int)Rarity.Common; i++)
+            {
+                foreach (var type in monsterSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Monster)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Common)
+                    {
+                        MonsterSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                        
+                    }
+                }
+
+                foreach (var type in armorSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Common)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in potionSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Common)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in weaponSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Common)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+            }
+            for (int i = 0; i < (int)Rarity.Rare; i++)
+            {
+                foreach (var type in monsterSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Monster)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Rare)
+                    {
+                        MonsterSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in armorSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Rare)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in potionSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Rare)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in weaponSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Rare)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+            }
+            for (int i = 0; i < (int)Rarity.Legendary; i++)
+            {
+                foreach (var type in monsterSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Monster)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Legendary)
+                    {
+                        MonsterSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in armorSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Legendary)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in potionSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Legendary)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+
+                foreach (var type in weaponSubclasses)
+                {
+                    var ctor = type.GetConstructors().Single();
+                    var instance = (Item)ctor.Invoke(new object[] { });
+
+                    if (instance.Rarity == Rarity.Legendary)
+                    {
+                        ItemsSpawns.Add(instance);
+                        SpawnList.Add(instance);
+                    }
+                }
+            }
+
+            // Pick number of monster spawns
+            int numberOfSpawns = 10;
+
+            //MonsterSpawns = MonsterSpawns.OrderBy(x => Random.Next()).Take(numberOfSpawns / 2).ToList();
+            //ItemsSpawns = ItemsSpawns.OrderBy(x => Random.Next()).Take(numberOfSpawns / 2).ToList();       
+
+            SpawnList = SpawnList.OrderBy(x => Random.Next()).Take(numberOfSpawns).ToList();
+
             CreatePlayer();
-            CreateWorld();
-            _currentBackpackSelection = 0;
-            _combatLog = new List<string>();
+            CreateWorld(SpawnList);
+            CurrentBackpackSelection = 0;
+            CombatLog = new List<string>();
 
             do
             {
@@ -33,7 +231,7 @@ namespace DungeonsOfDoom
                 DisplayWorld();
                 DisplayStats();
                 AskForMovement();
-            } while (_player.CurrentHealth > 0);
+            } while (Player.CurrentHealth > 0);
 
             GameOver();
         }
@@ -42,84 +240,58 @@ namespace DungeonsOfDoom
         {   
             RustyKnife rustyKnife = new RustyKnife();
             ClothArmor clothArmor = new ClothArmor();
-            _player = new Player(100, rustyKnife, clothArmor, "Oscar", 0, 0);
+            string playerName = "Oscar";
+            Player = new Player(100, rustyKnife, clothArmor, playerName, 0, 0);
         }
 
-        private void CreateWorld()
+        private void CreateWorld(List<ISpawnable> spawnList)
         {
-            _world = new Room[20, 5];
-            for (int y = 0; y < _world.GetLength(1); y++)
+            int xLength = 20;
+            int yLength = 5;
+            World = new Room[xLength, yLength];
+
+            // Create grid
+            for (int y = 0; y < World.GetLength(1); y++)
             {
-                for (int x = 0; x < _world.GetLength(0); x++)
-                {
-                    _world[x, y] = new Room();            
-
-                    int itemOrMonsterPercentage = _random.Next(0, 3);
-
-                    // Monster spawn
-                    if (itemOrMonsterPercentage <= 1)
-                    {
-                        int monsterTypePercentage = _random.Next(0, 10);
-                        switch (monsterTypePercentage)
-                        {
-                            case 0:
-                                _world[x, y].Monster = new Dragon();
-                                break;
-                            case 1:
-                                _world[x, y].Monster = new Bear();
-                                break;
-                            case 2:
-                                _world[x, y].Monster = new Cow();
-                                break;
-                        }
-                    }
-                    // Item spawn
-                    else
-                    {
-                        int itemTypePercentage = _random.Next(0, 15);
-                        switch (itemTypePercentage)
-                        {
-                            case 0:
-                                _world[x, y].Item = new SmallPotion();
-                                break;
-                            case 1:
-                                _world[x, y].Item = new BigPotion();
-                                break;
-                            case 2:
-                                _world[x, y].Item = new Broadsword();
-                                break;
-                            case 3:
-                                _world[x, y].Item = new Rocketlauncher();
-                                break;
-                            case 4:
-                                _world[x, y].Item = new LeatherArmor();
-                                break;
-                            case 5:
-                                _world[x, y].Item = new PlateArmor();
-                                break;
-                        }
-                    }
+                for (int x = 0; x < World.GetLength(0); x++)
+                {   
+                    World[x, y] = new Room();            
                 }
+            }
+
+            // Spawn things
+            for (int i = 0; i < spawnList.Count - 1; i++)
+            {
+                int x = Random.Next(0, xLength);
+                int y = Random.Next(0, yLength);
+
+                World[x, y].Spawn = spawnList[i];
             }
         }
 
         private void DisplayWorld()
         {
-            for (int y = 0; y < _world.GetLength(1); y++)
+            for (int y = 0; y < World.GetLength(1); y++)
             {
-                for (int x = 0; x < _world.GetLength(0); x++)
+                for (int x = 0; x < World.GetLength(0); x++)
                 {
-                    Room room = _world[x, y];
-                    if (_player.X == x && _player.Y == y)
+                    Room room = World[x, y];
+                    if (Player.X == x && Player.Y == y)
                     {
                         Console.Write("P");
                     }
-                    else if (room.Monster != null)
-                        Console.Write(room.Monster.GetShortName());
-                    else if (room.Item != null)
-                        Console.Write("I");
                     else
-                        Console.Write(".");
+                    {
+                        var monster = room.Spawn as Monster;
+                        if (monster != null)
+                            Console.Write(monster.GetShortName());
+
+                        var item = room.Spawn as Item;
+                        if (item != null)
+                            Console.Write("I");
+                        else
+                            Console.Write(".");
+                    }
                 }
                 Console.WriteLine();
             }
@@ -129,31 +301,31 @@ namespace DungeonsOfDoom
         {
             string line = "-------------------";
             Console.WriteLine(line);
-            Console.WriteLine($"Player: {_player.Name}");
-            Console.WriteLine($"Health: {_player.CurrentHealth} / {_player.MaxHealth}");
+            Console.WriteLine($"Player: {Player.Name}");
+            Console.WriteLine($"Health: {Player.CurrentHealth} / {Player.MaxHealth}");
             Console.WriteLine(line);
             Console.WriteLine("Equipment:");
-            Console.WriteLine($"Armor: [{_player.Armor.Name}] ({_player.Armor.ArmorClass} AC)");
-            Console.WriteLine($"Weapon: [{_player.Weapon.Name}] ({_player.Weapon.WeaponDamage} ATK)");
+            Console.WriteLine($"Armor: [{Player.Armor.Name}] ({Player.Armor.ArmorClass} AC)");
+            Console.WriteLine($"Weapon: [{Player.Weapon.Name}] ({Player.Weapon.WeaponDamage} ATK)");
             Console.WriteLine(line);
             Console.WriteLine("Backpack: ");
-            for (int i = 0; i < _player.Backpack.Count; i++)
+            for (int i = 0; i < Player.Backpack.Count; i++)
             {
-                if (i == _currentBackpackSelection)
+                if (i == CurrentBackpackSelection)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;                 
                 }
-                else if (_player.Backpack.Count == 0)
+                else if (Player.Backpack.Count == 0)
                 {
                     Console.WriteLine("Empty");
                 }
 
-                Console.WriteLine(_player.Backpack[i].Name);
+                Console.WriteLine(Player.Backpack[i].Name);
                 Console.ResetColor();
             }
             Console.WriteLine(line);
-            foreach (string s in _combatLog.Reverse<string>().Take(6))
+            foreach (string s in CombatLog.Reverse<string>().Take(6))
             {
                 Console.WriteLine(s);
                 Console.WriteLine("----");
@@ -162,8 +334,8 @@ namespace DungeonsOfDoom
 
         private void AskForMovement()
         {
-            int newX = _player.X;
-            int newY = _player.Y;
+            int newX = Player.X;
+            int newY = Player.Y;
             bool isValidKey = true;
 
             ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -178,59 +350,61 @@ namespace DungeonsOfDoom
                 case ConsoleKey.DownArrow: newY++;
                     break;
                 case ConsoleKey.W: 
-                    if (_currentBackpackSelection != 0)
+                    if (CurrentBackpackSelection != 0)
                     {
-                        _currentBackpackSelection--;
+                        CurrentBackpackSelection--;
                     }
                     break;
                 case ConsoleKey.S:
-                    if (_currentBackpackSelection != _player.Backpack.Count-1)
+                    if (CurrentBackpackSelection != Player.Backpack.Count-1)
                     {
-                        _currentBackpackSelection++;
+                        CurrentBackpackSelection++;
                     }
                     break;
-                case ConsoleKey.Enter: UseCurrentlySelectedItem();
-                    _currentBackpackSelection = 0;
+                case ConsoleKey.Enter:
+                    UseCurrentlySelectedItem();
+                    CurrentBackpackSelection = 0;
                      DisplayStats();
                     break;
                 default: isValidKey = false; break;
             }
 
             if (isValidKey &&
-                newX >= 0 && newX < _world.GetLength(0) &&
-                newY >= 0 && newY < _world.GetLength(1))
+                newX >= 0 && newX < World.GetLength(0) &&
+                newY >= 0 && newY < World.GetLength(1))
             {
-                _player.X = newX;
-                _player.Y = newY;
+                Player.X = newX;
+                Player.Y = newY;
                 RoomEncounter();
             }
         }
 
         private void UseCurrentlySelectedItem()
         {
-            _player.Backpack[_currentBackpackSelection].UseItem(_player);
+            Player.Backpack[CurrentBackpackSelection].UseItem(Player);
         }
 
         private void RoomEncounter()
         {
-            Room room = _world[_player.X, _player.Y];
+            Room room = World[Player.X, Player.Y];
 
             if (room.Item != null)
             {
-                room.Item.PickUpItem(_player);
-                _combatLog.Add($"You picked up {room.Item.Name}!");
+                room.Item.PickUp(Player);
+                CombatLog.Add($"You picked up {room.Item.Name}!");
                 room.Item = null; // Remove item when picked up
                 DisplayStats();
             }       
 
             if (room.Monster != null)
             {
-                _combatLog.Add(room.Monster.Attack(_player));
-                _combatLog.Add(_player.Attack(room.Monster));
+                CombatLog.Add(room.Monster.Attack(Player));
+                CombatLog.Add(Player.Attack(room.Monster));
 
                 if(room.Monster.CurrentHealth <= 0)
                 {
-                    _combatLog.Add($"{room.Monster.Name} was defeated!");
+                    CombatLog.Add($"{room.Monster.Name} was defeated!");
+                    room.Monster.PickUp(Player);
                     room.Monster = null; // Remove monster when defeated                    
                     DisplayStats(); 
                 }

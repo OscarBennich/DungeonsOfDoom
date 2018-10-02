@@ -6,6 +6,6 @@ namespace DungeonsOfDoom.Armors
 {
     class ClothArmor : Armor
     {
-        public ClothArmor() : base("Cloth Armor", 2) { }
+        public ClothArmor() : base("Cloth Armor", 2, Rarity.Common) { }
     }
 }

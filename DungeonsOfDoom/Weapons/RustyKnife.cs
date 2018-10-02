@@ -6,6 +6,6 @@ namespace DungeonsOfDoom.Weapons
 {
     class RustyKnife : Weapon
     {
-        public RustyKnife() : base("Rusty Knife", 5) { }
+        public RustyKnife() : base("Rusty Knife", 5, Rarity.Common) { }
     }
 }

@@ -8,7 +8,7 @@ namespace DungeonsOfDoom.Weapons
     {
         public int WeaponDamage { get; set; }
 
-        protected Weapon(string name, int weaponDamage) : base(name)
+        protected Weapon(string name, int weaponDamage, Rarity rarity) : base(name, rarity)
         {
             WeaponDamage = weaponDamage;
         }

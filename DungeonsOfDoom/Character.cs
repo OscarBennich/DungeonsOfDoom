@@ -29,7 +29,7 @@ namespace DungeonsOfDoom
         {   
             int calculatedAttackDamage = Math.Max(0, AttackDamage - charToAttack.ArmorClass);
             charToAttack.CurrentHealth -= calculatedAttackDamage;
-            return $"{this.Name} attacked {charToAttack.Name} for {calculatedAttackDamage} damage!";
+            return $"{Name} attacked {charToAttack.Name} for {calculatedAttackDamage} damage!"; // Should be changed to an object
         }
     }
 }
