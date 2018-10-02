@@ -15,7 +15,7 @@ namespace DungeonsOfDoom
 
         public List<Item> Backpack { get; }
 
-        public Player(int health, Weapon weapon, string name, int x, int y) : base(health, weapon.WeaponDamage, name)
+        public Player(int MaxHealth, Weapon weapon, string name, int x, int y) : base(MaxHealth, weapon.WeaponDamage, name)
         {
             X = x;
             Y = y;

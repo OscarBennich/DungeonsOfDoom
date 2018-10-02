@@ -23,7 +23,7 @@ namespace DungeonsOfDoom
                 DisplayWorld();
                 DisplayStats();
                 AskForMovement();
-            } while (player.Health > 0);
+            } while (player.CurrentHealth > 0);
 
             GameOver();
         }
@@ -110,8 +110,13 @@ namespace DungeonsOfDoom
 
         private void DisplayStats()
         {
-            Console.WriteLine($"Health: {player.Health}");
-            Console.WriteLine($"Weapon: {player.Weapon.Name}, Damage: {player.Weapon.WeaponDamage}");
+            Console.WriteLine("-------------------");
+            Console.WriteLine($"Player: {player.Name}");
+            Console.WriteLine($"Health: {player.CurrentHealth} / {player.MaxHealth}");
+            Console.WriteLine("-------------------");
+            Console.WriteLine("Equipment:");
+            Console.WriteLine("Armor: [...]");
+            Console.WriteLine($"Weapon: [{player.Weapon.Name}] ({player.Weapon.WeaponDamage} ATK)");
             Console.WriteLine("-------------------");
             Console.WriteLine("Backpack: ");
             foreach (Item i in player.Backpack)
@@ -157,7 +162,7 @@ namespace DungeonsOfDoom
                 room.Monster?.Attack(player);
                 player.Attack(room.Monster);
 
-                if(room.Monster.Health <= 0)
+                if(room.Monster.CurrentHealth <= 0)
                 {
                     room.Monster = null; // Remove monster when defeated
                 }
