@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonsOfDoom.Weapons;
+using DungeonsOfDoom.Monsters;
 
 namespace DungeonsOfDoom
 {
@@ -18,11 +20,8 @@ namespace DungeonsOfDoom
         public void PickUpItem(Player playerCharacter)
         {
             playerCharacter.Backpack.Add(this);
-
-            if (this is Weapon)
-            {
-                playerCharacter.EquipWeapon((Weapon)this);
-            }
         }
+
+        public abstract void UseItem(Player playerCharacter);
     }
 }

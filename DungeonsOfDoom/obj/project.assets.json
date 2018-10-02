@@ -687,11 +687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\DungeonsOfDoomStart\\DungeonsOfDoom\\DungeonsOfDoom\\DungeonsOfDoom.csproj",
+      "projectUniqueName": "C:\\Projects\\DungeonsOfDoom\\DungeonsOfDoom\\DungeonsOfDoom.csproj",
       "projectName": "DungeonsOfDoom",
-      "projectPath": "C:\\Projects\\DungeonsOfDoomStart\\DungeonsOfDoom\\DungeonsOfDoom\\DungeonsOfDoom.csproj",
+      "projectPath": "C:\\Projects\\DungeonsOfDoom\\DungeonsOfDoom\\DungeonsOfDoom.csproj",
       "packagesPath": "C:\\Users\\i100567\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\DungeonsOfDoomStart\\DungeonsOfDoom\\DungeonsOfDoom\\obj\\",
+      "outputPath": "C:\\Projects\\DungeonsOfDoom\\DungeonsOfDoom\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

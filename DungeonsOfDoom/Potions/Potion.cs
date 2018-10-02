@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DungeonsOfDoom
+namespace DungeonsOfDoom.Potions
 {
     abstract class Potion : Item
     {
@@ -11,6 +11,20 @@ namespace DungeonsOfDoom
         protected Potion(string name, int healthValue) : base(name)
         {
             HealthValue = healthValue;
+        }
+
+        public override void UseItem(Player playerCharacter)
+        {
+            if (playerCharacter.CurrentHealth + HealthValue > playerCharacter.MaxHealth)
+            {
+                playerCharacter.CurrentHealth = playerCharacter.MaxHealth;
+                playerCharacter.Backpack.Remove(this);
+            }
+            else
+            {
+                playerCharacter.CurrentHealth += HealthValue;
+                playerCharacter.Backpack.Remove(this);
+            }
         }
     }
 }
