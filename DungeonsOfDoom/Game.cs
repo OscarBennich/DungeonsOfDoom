@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonsOfDoom.Weapons;
+using DungeonsOfDoom.Potions;
+using DungeonsOfDoom.Monsters;
 
 namespace DungeonsOfDoom
 {
@@ -159,7 +162,7 @@ namespace DungeonsOfDoom
 
             if (room.Monster != null)
             {
-                room.Monster?.Attack(player);
+                room.Monster.Attack(player);
                 player.Attack(room.Monster);
 
                 if(room.Monster.CurrentHealth <= 0)
