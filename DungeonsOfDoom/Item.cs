@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DungeonsOfDoom
+{
+    abstract class Item
+    {
+        public string Name { get; }
+
+        protected Item(string name)
+        {
+            Name = name;
+        }
+
+        public void PickUpItem(Player playerCharacter)
+        {
+            playerCharacter.Backpack.Add(this);
+
+            if (this is Weapon)
+            {
+                playerCharacter.EquipWeapon((Weapon)this);
+            }
+        }
+    }
+}

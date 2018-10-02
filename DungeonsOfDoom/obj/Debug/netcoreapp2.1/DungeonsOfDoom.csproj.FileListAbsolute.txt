@@ -1,0 +1,11 @@
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\bin\Debug\netcoreapp2.1\DungeonsOfDoom.deps.json
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\bin\Debug\netcoreapp2.1\DungeonsOfDoom.runtimeconfig.json
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\bin\Debug\netcoreapp2.1\DungeonsOfDoom.runtimeconfig.dev.json
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\bin\Debug\netcoreapp2.1\DungeonsOfDoom.dll
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\bin\Debug\netcoreapp2.1\DungeonsOfDoom.pdb
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\obj\Debug\netcoreapp2.1\DungeonsOfDoom.csprojAssemblyReference.cache
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\obj\Debug\netcoreapp2.1\DungeonsOfDoom.csproj.CoreCompileInputs.cache
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\obj\Debug\netcoreapp2.1\DungeonsOfDoom.AssemblyInfoInputs.cache
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\obj\Debug\netcoreapp2.1\DungeonsOfDoom.AssemblyInfo.cs
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\obj\Debug\netcoreapp2.1\DungeonsOfDoom.dll
+C:\Projects\DungeonsOfDoomStart\DungeonsOfDoom\DungeonsOfDoom\obj\Debug\netcoreapp2.1\DungeonsOfDoom.pdb
