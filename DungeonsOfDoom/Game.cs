@@ -280,17 +280,17 @@ namespace DungeonsOfDoom
                     {
                         Console.Write("P");
                     }
+                    else if (room.Spawn is Monster monster)
+                    {
+                        Console.Write(monster.GetShortName());
+                    }
+                    else if (room.Spawn is Item item)
+                    {
+                        Console.Write("I");
+                    }
                     else
                     {
-                        var monster = room.Spawn as Monster;
-                        if (monster != null)
-                            Console.Write(monster.GetShortName());
-
-                        var item = room.Spawn as Item;
-                        if (item != null)
-                            Console.Write("I");
-                        else
-                            Console.Write(".");
+                        Console.Write(".");
                     }
                 }
                 Console.WriteLine();
@@ -325,7 +325,7 @@ namespace DungeonsOfDoom
                 Console.ResetColor();
             }
             Console.WriteLine(line);
-            foreach (string s in CombatLog.Reverse<string>().Take(6))
+            foreach (string s in CombatLog.Reverse<string>().Take(3))
             {
                 Console.WriteLine(s);
                 Console.WriteLine("----");
@@ -388,25 +388,25 @@ namespace DungeonsOfDoom
         {
             Room room = World[Player.X, Player.Y];
 
-            if (room.Item != null)
+            if (room.Spawn is Item item)
             {
-                room.Item.PickUp(Player);
-                CombatLog.Add($"You picked up {room.Item.Name}!");
-                room.Item = null; // Remove item when picked up
+                item.PickUp(Player);
+                CombatLog.Add($"You picked up {item.Name}!");
+                room.Spawn = null; // Remove item when picked up
                 DisplayStats();
-            }       
+            }
 
-            if (room.Monster != null)
+            if (room.Spawn is Monster monster)
             {
-                CombatLog.Add(room.Monster.Attack(Player));
-                CombatLog.Add(Player.Attack(room.Monster));
+                CombatLog.Add(monster.Attack(Player));
+                CombatLog.Add(Player.Attack(monster));
 
-                if(room.Monster.CurrentHealth <= 0)
+                if (monster.CurrentHealth <= 0)
                 {
-                    CombatLog.Add($"{room.Monster.Name} was defeated!");
-                    room.Monster.PickUp(Player);
-                    room.Monster = null; // Remove monster when defeated                    
-                    DisplayStats(); 
+                    CombatLog.Add($"{monster.Name} was defeated!");
+                    monster.PickUp(Player);
+                    room.Spawn = null;                   
+                    DisplayStats();
                 }
             }
         }
